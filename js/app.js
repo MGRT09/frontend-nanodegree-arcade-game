@@ -53,7 +53,7 @@ function checkCollisions() {
             enemy.x + 80 > player.x &&
             enemy.y < player.y + 60 &&
             enemy.y + 60 > player.y) {
-            player.score = player.score - 1;
+            player.lives = player.lives - 1;
             player.start();
           //console.log("COLLISION!!!" + "enemyX is " + enemy.x + "enemyY is " + enemy.y);
             //console.log("Player x and y are" + player.x + "- " + player.y);
@@ -76,7 +76,7 @@ var Player = function (x, y) {
     this.y = y;
     this.width = 101;
     this.height = 171;
-    this.lives = 3;
+    this.lives = 4;
     this.score = 0;
     this.start();
 }
@@ -86,6 +86,10 @@ var Player = function (x, y) {
 Player.prototype.start = function () {
     this.x = 150;
     this.y = 390;
+    $('#livesCount').text("Lives: " + this.lives);
+    if (this.lives === 0){
+        alert("end of game");
+    }
     //Can I make this random within a certain area?
 };
 //Allows player to move - include catch for when player successfully get to water line.
@@ -94,12 +98,12 @@ Player.prototype.update = function (dt) {
     this.x * (dt);
     this.y * (dt);
   
-    
     if (this.y === -10){
         this.start();
-        console.log("made it")
+        //console.log("made it")
         this.score = this.score + 10;
-        console.log("Score " + this.score);
+        //console.log("Score " + this.score);
+        $('#scoreBar').text("Score: " + this.score);
     }
     
 }
