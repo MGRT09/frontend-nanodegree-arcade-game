@@ -83,6 +83,7 @@ var Engine = (function(global) {
         if (gameState === 'run') {   
         updateEntities(dt);
         checkCollisions();
+        }
     }
 
     /* This is called by the update function and loops through all of the
@@ -185,4 +186,8 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    
+    /* Code for popup */
+    $(document).ready($("#myModal").modal('show'));
+    
 })(this);
