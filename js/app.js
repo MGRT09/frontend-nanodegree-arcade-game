@@ -134,6 +134,13 @@ Player.prototype.handleInput = function (keyStroke) {
             //console.log(this.y)
             }
             break;
+        case "pause":
+            gameState = 'pause';
+            console.log("Pressed Pause")
+            break;
+        case "restart":
+            gameState = 'run';
+            break;
     }
 };
 
@@ -169,7 +176,9 @@ document.addEventListener('keyup', function (e) {
         37: 'left',
         38: 'up',
         39: 'right',
-        40: 'down'
+        40: 'down',
+        82: 'restart',
+        80: 'pause'
     };
  //console.log(allowedKeys[e.keyCode]);
     player.handleInput(allowedKeys[e.keyCode]);

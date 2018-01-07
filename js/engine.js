@@ -12,6 +12,8 @@
  * This engine makes the canvas' context (ctx) object globally available to make 
  * writing app.js a little simpler to work with.
  */
+var gameState = 'run';
+
 
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
@@ -78,6 +80,7 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
+        if (gameState === 'run') {   
         updateEntities(dt);
         checkCollisions();
     }
