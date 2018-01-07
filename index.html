@@ -18,13 +18,13 @@ Some minor tweeks added to title and comments -->
     Score: 
     </div>
     <div id="livesCount">
-    Lives 
+    Lives: 
     </div>
     
     <!-- Code for a start popup --->
     <div class="container">
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="startModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -42,6 +42,24 @@ Some minor tweeks added to title and comments -->
     </div>
   </div>
 </div>
+    
+ <div class="modal fade" id="endModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">You are out of lives</h4>
+        </div>
+        <div class="modal-body">
+            <p id="finalScore"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="restartButton" class="btn btn-default" data-dismiss="modal" >RESTART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
     
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>

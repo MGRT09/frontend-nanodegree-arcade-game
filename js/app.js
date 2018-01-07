@@ -15,8 +15,6 @@ var Enemy = function (x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
-    //this.width = 101;
-    //this.height = 171;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -42,6 +40,7 @@ Enemy.prototype.update = function (dt) {
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    //Box for checking collisons
    //drawBox(this.x, this.y + 77, 100, 67, "yellow");
 };
 
@@ -55,10 +54,7 @@ function checkCollisions() {
             enemy.y + 60 > player.y) {
             player.lives = player.lives - 1;
             player.start();
-          //console.log("COLLISION!!!" + "enemyX is " + enemy.x + "enemyY is " + enemy.y);
-            //console.log("Player x and y are" + player.x + "- " + player.y);
-            //player.status = false;
-        }  // end if
+        }  
     })
 }
 
@@ -76,7 +72,7 @@ var Player = function (x, y) {
     this.y = y;
     this.width = 101;
     this.height = 171;
-    this.lives = 4;
+    this.lives = 3;
     this.score = 0;
     this.start();
 }
@@ -86,29 +82,54 @@ var Player = function (x, y) {
 Player.prototype.start = function () {
     this.x = 150;
     this.y = 390;
+    //Lives - check if its zero - if so send pause and show splash screen
     $('#livesCount').text("Lives: " + this.lives);
     if (this.lives === 0){
-        alert("end of game");
-    }
+        gameState = 'pause';
+        $(document).ready($("#endModal").modal('show'));
+        newGameListener();
+        document.getElementById("finalScore").innerHTML = "Your Final Score is " + this.score;  
+    } 
     //Can I make this random within a certain area?
 };
+
+Player.prototype.restart = function () {
+    //this.x = 150;
+    //this.y = 390;
+    //this.lives = 3;
+    //this.score = 0;
+    //alert(this.lives);
+    gameState = "run";
+    //alert(this.lives)
+    
+    var player = new Player();
+};
+
+
+
 //Allows player to move - include catch for when player successfully get to water line.
 Player.prototype.update = function (dt) {
     //this.start();
     this.x * (dt);
     this.y * (dt);
   
+    //Check to see if the player is in the water
     if (this.y === -10){
         this.start();
         //console.log("made it")
         this.score = this.score + 10;
-        //console.log("Score " + this.score);
         $('#scoreBar').text("Score: " + this.score);
     }
     
 }
 
+function newGameListener() {
+    restartButton.addEventListener('click', newGame);
+}
 
+function newGame() {
+    Player.prototype.restart();
+}
 
 
 Player.prototype.handleInput = function (keyStroke) {
