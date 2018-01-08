@@ -6,6 +6,8 @@
 //    ctx.strokeStyle = color;
 //    ctx.stroke();
 //}
+var startLives = 3;
+var startScore = 0;
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
 	// Variables applied to each of our instances go here,
@@ -70,21 +72,31 @@ Player.prototype.start = function() {
 	if (this.lives === 0) {
 		gameState = 'pause';
 		$(document).ready($("#endModal").modal('show'));
-		newGameListener();
+        newGameListener();
 		document.getElementById("finalScore").innerHTML = "Your Final Score is " + this.score;
+        
+        //this.lives = 3;
 	}
+   
 	//Can I make this random within a certain area?
 };
 Player.prototype.restart = function() {
-	//this.x = 150;
-	//this.y = 390;
-	//this.lives = 3;
-	//this.score = 0;
+    var player = new Player();
+    this.x = 150;
+	this.y = 390;
+    this.score = 0;
+    $('#scoreBar').text("Score: " + this.score);
+    this.lives = 3;
+    $('#livesCount').text("Lives: " + this.lives);
+   
+    this.newthing = "bob";
 	//alert(this.lives);
 	gameState = "run";
 	//alert(this.lives)
-	var player = new Player();
+	
 };
+
+
 //Allows player to move - include catch for when player successfully get to water line.
 Player.prototype.update = function(dt) {
 	//this.start();
@@ -103,8 +115,15 @@ function newGameListener() {
 	restartButton.addEventListener('click', newGame);
 }
 
+
 function newGame() {
+    //alert("New game clicked")
 	Player.prototype.restart();
+    //lives = startLives;
+    //score = startScore;
+    //alert(this.score);
+    //alert(player.lives);
+    
 }
 Player.prototype.handleInput = function(keyStroke) {
 	switch (keyStroke) {
