@@ -24,3 +24,9 @@ The game has the following elements.
 * End splash screen 
 * Restart button
 
+## Instructions
+To run the game simply run the <code> index.html </code> 
+Move the player around the screen with the arrow keys
+lower case p will pause the game
+lower case r will restart
+The aim of the game is to get the player to the water at the top of the screen as many times with the 3 lives avaliable. 
