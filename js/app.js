@@ -5,9 +5,7 @@
 //    ctx.lineWidth = 2;
 //    ctx.strokeStyle = color;
 //    ctx.stroke();
-//}
-var startLives = 3;
-var startScore = 0;
+//
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
 	// Variables applied to each of our instances go here,
@@ -30,8 +28,6 @@ Enemy.prototype.update = function(dt) {
 	if (this.x > 500) {
 		this.x = -100;
 		//Can we change speed too?
-		//(Math.random() * 1000);
-		//debugger;
 	}
 };
 // Draw the enemy on the screen, required method for game
@@ -72,31 +68,21 @@ Player.prototype.start = function() {
 	if (this.lives === 0) {
 		gameState = 'pause';
 		$(document).ready($("#endModal").modal('show'));
-        newGameListener();
+		newGameListener();
 		document.getElementById("finalScore").innerHTML = "Your Final Score is " + this.score;
-        
-        //this.lives = 3;
 	}
-   
 	//Can I make this random within a certain area?
 };
+//Resstart function - works on click of button on modal popup
 Player.prototype.restart = function() {
-    var player = new Player();
-    this.x = 150;
+	this.x = 150;
 	this.y = 390;
-    this.score = 0;
-    $('#scoreBar').text("Score: " + this.score);
-    this.lives = 3;
-    $('#livesCount').text("Lives: " + this.lives);
-   
-    this.newthing = "bob";
-	//alert(this.lives);
+	player.score = 0;
+	$('#scoreBar').text("Score: " + player.score);
+	player.lives = 3;
+	$('#livesCount').text("Lives: " + player.lives);
 	gameState = "run";
-	//alert(this.lives)
-	
 };
-
-
 //Allows player to move - include catch for when player successfully get to water line.
 Player.prototype.update = function(dt) {
 	//this.start();
@@ -105,26 +91,15 @@ Player.prototype.update = function(dt) {
 	//Check to see if the player is in the water
 	if (this.y === -10) {
 		this.start();
-		//console.log("made it")
 		this.score = this.score + 10;
 		$('#scoreBar').text("Score: " + this.score);
 	}
 }
-
+//Listener for the button click on restart
 function newGameListener() {
-	restartButton.addEventListener('click', newGame);
+	restartButton.addEventListener('click', Player.prototype.restart);
 }
-
-
-function newGame() {
-    //alert("New game clicked")
-	Player.prototype.restart();
-    //lives = startLives;
-    //score = startScore;
-    //alert(this.score);
-    //alert(player.lives);
-    
-}
+//Keystrokes used in the game, movement, pause and restart
 Player.prototype.handleInput = function(keyStroke) {
 	switch (keyStroke) {
 		case "left":
@@ -165,6 +140,7 @@ Player.prototype.render = function() {
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	// drawBox(this.x + 10, this.y + 61, 85, 80, "blue");
 };
+//enemies with random speeds
 var enemy1 = new Enemy(-100, 60, (Math.random() * 100));
 var enemy2 = new Enemy(-100, 145, (Math.random() * 200));
 var enemy3 = new Enemy(-100, 225, (Math.random() * 150));

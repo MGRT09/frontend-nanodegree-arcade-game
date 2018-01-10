@@ -11,6 +11,7 @@ index.html - Initial html file to access the game
 * /js/engine.js - 
 * /js/resource.js
 * /css/style.css
+*/images/*.png
 
 
 ## GamePlay/Features
