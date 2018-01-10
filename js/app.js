@@ -77,12 +77,23 @@ Player.prototype.start = function() {
 Player.prototype.restart = function() {
 	this.x = 150;
 	this.y = 390;
-	player.score = 0;
-	$('#scoreBar').text("Score: " + player.score);
-	player.lives = 3;
-	$('#livesCount').text("Lives: " + player.lives);
+	//this.score = 0;
+    resetValues();
+	//$('#scoreBar').text("Score: " + this.score);
+	//this.lives = 3;
+	//$('#livesCount').text("Lives: " + this.lives);
 	gameState = "run";
 };
+
+function resetValues() {
+    //alert("score is now 0");
+    player.score = 0;
+    player.lives = 3;
+    //$('#scoreBar').text(score);
+    $('#scoreBar').text("Score: " + player.score);
+    $('#livesCount').text("Lives: " + player.lives);
+}
+
 //Allows player to move - include catch for when player successfully get to water line.
 Player.prototype.update = function(dt) {
 	//this.start();
